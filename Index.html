@@ -1,1 +1,21 @@
 
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Emma Saga</title>
+<style>body{margin:0;background:#ff9ecb;text-align:center;font-family:Arial;color:white}h1{margin:10px}canvas{background:#fff0f6;border-radius:20px}button{background:#c2185b;color:white;border:none;padding:10px 20px;border-radius:20px}</style>
+</head><body>
+<h1>💖 Emma Saga 💖</h1>
+<div id="score">النقاط: 0</div><br>
+<canvas id="game" width="360" height="500"></canvas><br>
+<button onclick="location.reload()">العب من جديد</button>
+<script>
+const c=document.getElementById('game'),ctx=c.getContext('2d');
+const colors=['#ff4081','#ffeb3b','#00bcd4','#4caf50','#9c27b0','#ff9800'];
+let score=0,bubbles=[],current,angle=-Math.PI/2;
+function newBubble(x,y,color){return{x,y,r:18,color:color||colors[Math.floor(Math.random()*colors.length)]}}
+for(let r=0;r<4;r++)for(let col=0;col<8;col++)bubbles.push(newBubble(30+col*38+(r%2?19:0),30+r*34));
+function next(){current=newBubble(180,470)}next();
+function draw(){ctx.clearRect(0,0,360,500);bubbles.forEach(b=>{ctx.beginPath();ctx.arc(b.x,b.y,b.r,0,Math.PI*2);ctx.fillStyle=b.color;ctx.fill();ctx.strokeStyle='white';ctx.stroke()});ctx.beginPath();ctx.arc(current.x,current.y,current.r,0,Math.PI*2);ctx.fillStyle=current.color;ctx.fill();ctx.stroke();requestAnimationFrame(draw)}draw();
+c.addEventListener('click',e=>{let r=c.getBoundingClientRect();let mx=e.clientX-r.left,my=e.clientY-r.top;angle=Math.atan2(my-470,mx-180);let m={x:180,y:470,dx:Math.cos(angle)*6,dy:Math.sin(angle)*6,color:current.color};let iv=setInterval(()=>{m.x+=m.dx;m.y+=m.dy;if(m.x<18||m.x>342)m.dx*=-1;let hit=bubbles.find(b=>Math.hypot(b.x-m.x,b.y-m.y)<36);if(hit||m.y<30){bubbles.push(newBubble(m.x,m.y,m.color));let same=bubbles.filter(b=>b.color===m.color&&Math.hypot(b.x-m.x,b.y-m.y)<60);if(same.length>=2){same.forEach(s=>{bubbles=bubbles.filter(b=>b!==s)});score+=same.length*10;document.getElementById('score').innerText='النقاط: '+score}clearInterval(iv);next()}if(m.y>500){clearInterval(iv);next()}},20)});
+</script></body></html>
