@@ -1,18 +1,8 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Emma Saga 💖</title>
-<style>
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-body{margin:0;font-family:system-ui,sans-serif;background:linear-gradient(180deg,#ff9ecf,#a78bfa,#6ee7ff);min-height:100vh;display:flex;flex-direction:column;align-items:center;color:#fff;overflow-x:hidden}
-h1{margin:12px 0 2px;font-size:32px;text-shadow:0 3px 0 #ec4899;text-align:center}
-p.sub{margin:0 0 8px;opacity:.95;font-weight:600}
-.top{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
-.badge{background:rgba(255,255,255,.95);color:#db2777;padding:8px 14px;border-radius:999px;font-weight:800;font-size:15px;box-shadow:0 4px 0 rgba(0,0,0,.15)}
-#game{width:360px;max-width:94vw;height:480px;background:rgba(255,255,255,.92);border-radius:22px;position:relative;overflow:hidden;margin-top:10px;box-shadow:0 12px 30px rgba(0,0,0,.25);touch-action:none}
-.bubble{position:absolute;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;cursor:pointer;border:3px solid rgba(255,255,255,.9);box-shadow:0 4px 8px rgba(0,0,0,.2);transition:transform .1s}
-.bubble:active{transform:scale(.85)}
-#shooter{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:32px;border:4px solid #fff;box-shadow:0 6px 12px rgba(0,0,0,.3);cursor:pointer;z-index:10}
-#aim{position:absolute;bottom:78px;left:50%;width:3px;height:340px;background:rgba(219,39,119,.5
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Emma Saga 💖</title><style>body{margin:0;text-align:center;font-family:sans-serif;background:linear-gradient(#ff9ecf,#a78bfa);color:#fff}h1{margin:10px}#g{width:340px;max-width:94vw;height:460px;background:#fff;border-radius:20px;margin:auto;position:relative;overflow:hidden}.b{position:absolute;width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;border:3px solid #fff;cursor:pointer}button{background:#fff;color:#db2777;border:0;padding:12px 20px;border-radius:99px;font-weight:900}</style></head><body>
+<h1>💖 Emma Saga 👑</h1><p>⭐ <span id="s">0</span> | 🏆 Niv <span id="l">1</span> | ❤️ <span id="v">3</span></p><div id="g"></div><br><button onclick="go()">▶ JOUER</button>
+<script>
+let sc=0,lv=1,vi=3,E=['💖','⭐','💜','💙','💛','🌸'],g=document.getElementById('g');
+function go(){g.innerHTML='';sc=0;lv=1;vi=3;upd();setInterval(add,900)}
+function upd(){document.getElementById('s').innerText=sc;document.getElementById('l').innerText=lv;document.getElementById('v').innerText=vi}
+function add(){if(vi<=0)return;let d=document.createElement('div');d.className='b';d.innerText=E[Math.floor(Math.random()*E.length)];d.style.left=Math.random()*280+'px';d.style.top='0px';d.style.background='#'+Math.floor(Math.random()*16777215).toString(16);g.appendChild(d);let t=setInterval(()=>{let y=parseInt(d.style.top)+3;d.style.top=y+'px';if(y>420){clearInterval(t);d.remove();vi--;upd();if(vi<=0)alert('Game Over Emma! Score: '+sc)}},30);d.onclick=()=>{clearInterval(t);d.remove();sc+=10;if(sc%50==0)lv++;upd()}}
+</script></body></html>
